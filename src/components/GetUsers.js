@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 export const GetUsers = () => {
 
     const [data,setData] = useState([]);
+    
    
         useEffect(()=>{
             axios.get('http://localhost:5000/api/users')
@@ -17,7 +18,14 @@ export const GetUsers = () => {
             })
         
           },[data])
-       
+
+        const deleteUser =async (user)=>{
+            try{
+           await axios.delete('http://localhost:5000/api/users',{data:user});    
+            }
+            catch(err){console.log(err);}
+        }
+          
   return (
     <div>
          <>
@@ -30,7 +38,6 @@ export const GetUsers = () => {
                         <th>Email</th>
                         <th>phone</th>
                         <th>Gender</th>
-
                     </tr>
                 </thead>
                 {
@@ -43,14 +50,14 @@ export const GetUsers = () => {
                                     <td>{user.email}</td>
                                     <td>{user.phone}</td>
                                     <td>{user.gender}</td>
+                                   <td><button className='btn btn-danger' onClick={()=>{deleteUser(user)}}>Delete</button> </td>
                                 </tr>
                             </tbody>
-
                         );
                     })
                 }
             </table>
-            <Link to='/post' className='btn btn-success'>Add New Product</Link>
+            <Link to='/post' className='btn btn-success'>Add New user</Link>
         </>
 
     </div>

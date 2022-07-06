@@ -5,9 +5,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 export const AddUsers = () => {
 
     const URL = "http://localhost:5000/api/users";
